@@ -35,13 +35,8 @@
     "global": {
       "anchors": [
         {
-          "anchor": "Documentation",
-          "href": "https://mintlify.com/docs",
-          "icon": "book-open-cover"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://mintlify.com/blog",
+          "anchor": "Bad To Good Emails Website",
+          "href": "https://badtogoodemails.com",
           "icon": "newspaper"
         }
       ]
