@@ -40,6 +40,12 @@
       {
           "tab": "Documentation",
         "groups": [
+            {
+            "group": "Bad To Good Emails",
+            "pages": [
+              "Bad-ToGood-Emails/Email-Correction"
+            ]
+          },
            {
             "group": "Account Info",
             "pages": [
