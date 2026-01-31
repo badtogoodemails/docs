@@ -9,8 +9,16 @@
   },
   "favicon": "/favicon.svg",
   "navigation": {
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Bad To Good Emails Website",
+          "icon": "newspaper",
+          "href": "https://badtogoodemails.com"
+        }
+      ]
+    },
     "tabs": [
-     
       {
         "tab": "API reference",
         "groups": [
@@ -23,24 +31,13 @@
           {
             "group": "Endpoint examples",
             "pages": [
-              "api-reference/endpoint/verify",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "api-reference/endpoint-examples/credits",
+              "api-reference/endpoint/verify"
             ]
           }
         ]
       }
-    ],
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Bad To Good Emails Website",
-          "href": "https://badtogoodemails.com",
-          "icon": "newspaper"
-        }
-      ]
-    }
+    ]
   },
   "logo": {
     "light": "/logo/light.svg",
