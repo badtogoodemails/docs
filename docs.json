@@ -36,6 +36,18 @@
             ]
           }
         ]
+      },
+      {
+          "tab": "Documentation",
+        "groups": [
+           {
+            "group": "Account Info",
+            "pages": [
+              "account-info/manage-users",
+              "account-info/securing-your-account"
+            ]
+          }
+        ]
       }
     ]
   },
