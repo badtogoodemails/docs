@@ -5,6 +5,12 @@
     "description": "API for correcting business emails",
     "version": "v1"
   },
+   "servers": [
+    {
+      "url": "https://api.badtogoodemails.com:8443",
+      "description": "Production API"
+    }
+   ]
   "paths": {
     "/api/v1/credits": {
       "get": {
