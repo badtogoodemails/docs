@@ -2,25 +2,22 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Bad To Good Emails API",
-    "description": "API for correcting business emails",
+    "description": "Bad To Good Emails is the leader in correcting your B2B leads. \r\n\r\nThe API key is located in your account on Bad To Good Emails at [app.badtogoodemails.com](https://app.badtogoodemails.com) under API Management → API Keys.",
     "version": "v1"
   },
-   "servers": [
-    {
-      "url": "https://api.badtogoodemails.com:8443",
-      "description": "Production API"
-    }
-   ],
   "paths": {
     "/api/v1/credits": {
       "get": {
         "tags": [
           "credits"
         ],
+        "summary": "Get remaining credit balance",
+        "description": "Returns the remaining scan and discovery credits for the authenticated account.",
         "parameters": [
           {
             "name": "apiKey",
             "in": "query",
+            "description": "Your API key (alternative to X-API-Key header)",
             "schema": {
               "type": "string"
             }
@@ -28,6 +25,7 @@
           {
             "name": "X-API-Key",
             "in": "header",
+            "description": "Your API key (alternative to apiKey query param)",
             "schema": {
               "type": "string"
             }
@@ -35,7 +33,64 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditsResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditsResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditsResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditsErrorResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditsErrorResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditsErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditsErrorResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditsErrorResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreditsErrorResponse"
+                }
+              }
+            }
           }
         }
       }
@@ -45,10 +100,13 @@
         "tags": [
           "verify"
         ],
+        "summary": "Verify and correct an email address",
+        "description": "Verifies a B2B email address and returns corrected alternatives if the provided email is invalid.",
         "parameters": [
           {
             "name": "email",
             "in": "query",
+            "description": "The email address to verify",
             "schema": {
               "type": "string"
             }
@@ -56,6 +114,7 @@
           {
             "name": "apiKey",
             "in": "query",
+            "description": "Your API key (alternative to X-API-Key header)",
             "schema": {
               "type": "string"
             }
@@ -63,6 +122,7 @@
           {
             "name": "X-API-Key",
             "in": "header",
+            "description": "Your API key (alternative to apiKey query param)",
             "schema": {
               "type": "string"
             }
@@ -70,6 +130,7 @@
           {
             "name": "firstName",
             "in": "query",
+            "description": "Contact's first name — improves correction accuracy",
             "schema": {
               "type": "string"
             }
@@ -77,6 +138,7 @@
           {
             "name": "lastName",
             "in": "query",
+            "description": "Contact's last name — improves correction accuracy",
             "schema": {
               "type": "string"
             }
@@ -84,6 +146,7 @@
           {
             "name": "linkedInProfileUrl",
             "in": "query",
+            "description": "LinkedIn profile URL — improves correction accuracy",
             "schema": {
               "type": "string"
             }
@@ -91,6 +154,7 @@
           {
             "name": "domain",
             "in": "query",
+            "description": "Known company domain — used to discover business email if personal email is provided",
             "schema": {
               "type": "string"
             }
@@ -98,11 +162,182 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/VerificationResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VerificationResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VerificationResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
           }
         }
       }
     }
   },
-  "components": { }
+  "components": {
+    "schemas": {
+      "CreditsErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "error_code": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreditsResponse": {
+        "type": "object",
+        "properties": {
+          "subscription_scans_remaining": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "subscription_discoveries_remaining": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "additional_scans": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "additional_discoveries": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "EmailSuggestion": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "confidence": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "error_code": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "VerificationResult": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "sub_status": {
+            "type": "string",
+            "nullable": true
+          },
+          "corrected_emails": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EmailSuggestion"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
 }
